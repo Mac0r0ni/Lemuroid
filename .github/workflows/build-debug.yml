@@ -37,5 +37,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Lemuroid-S22Ultra-Debug-APK
-          path: lemuroid-app/build/outputs/apk/debug/*.apk
+          # Using '**' tells GitHub to search all subfolders for the APK
+          path: "**/build/outputs/apk/debug/*.apk"
+          if-no-files-found: error # This will make the job fail if it STILL can't find it
           
+
+    
