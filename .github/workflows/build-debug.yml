@@ -1,4 +1,4 @@
-name: Build Debug APP
+name: Build Debug APK
 
 on:
   workflow_dispatch:
@@ -38,6 +38,4 @@ jobs:
         with:
           name: Lemuroid-S22Ultra-Debug-APK
           path: lemuroid-app/build/outputs/apk/debug/*.apk
-          with:
-          name: Lemuroid-Debug-APK
-          path: lemuroid-app/build/outputs/apk/debug/*.apk
+          
