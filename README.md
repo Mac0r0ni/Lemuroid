@@ -57,5 +57,5 @@ It originated from a rib of [Retrograde](https://github.com/retrograde/retrograd
 - Cloud save sync
 - HD mode
 
-### Languages:
+### Languages::
 You can help translate Lemuroid in your native language by going here: https://crowdin.com/project/lemuroid
