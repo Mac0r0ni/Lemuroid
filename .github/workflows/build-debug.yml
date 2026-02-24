@@ -10,8 +10,8 @@ jobs:
     name: Build APK
     runs-on: ubuntu-latest
     env:
-      _JAVA_OPTIONS: "-Xmx4g"
-      GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx4g -Dorg.gradle.daemon=false"
+      _JAVA_OPTIONS: "-Xmx6g" # Pushing closer to the 7GB limit
+      GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx6g -Dorg.gradle.workers.max=2 -Dorg.gradle.daemon=false -Dorg.gradle.configuration-cache=false"
 
     steps:
       - name: Checkout repository
@@ -29,11 +29,15 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Build Debug APK
-        run: ./gradlew clean :lemuroid-app:assembleDebug
+      - name: Build Debug APK (ARM64 only)
+        # We pass a project property to limit architectures and speed up the build
+        run: ./gradlew clean :lemuroid-app:assembleDebug -Pandroid.injected.abi.list=arm64-v8a
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
+          name: Lemuroid-S22Ultra-Debug-APK
+          path: lemuroid-app/build/outputs/apk/debug/*.apk
+          with:
           name: Lemuroid-Debug-APK
           path: lemuroid-app/build/outputs/apk/debug/*.apk
